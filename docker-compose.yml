@@ -1,0 +1,38 @@
+version: '3.9'
+
+services:
+
+  bdb:
+    image: postgres:latest
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_PASSWORD: BUYB2QAZ
+      POSTGRES_USER: postgres
+<<<<<<< HEAD
+      POSTGRES_DB: Leather_product
+=======
+      POSTGRES_DB: dbname;
+>>>>>>> message
+    restart: always
+    ports:
+    - "5432:5432"
+
+  bweb:
+    container_name: bweb
+    build:
+      context: backend
+      dockerfile: Dockerfile
+    command: bash -c "python /usr/src/backend/manage.py makemigrations --noinput &&
+             python /usr/src/backend/manage.py migrate --noinput &&
+             python manage.py collectstatic --noinput &&
+             python /usr/src/backend/manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - ./backend:/usr/src/backend
+    ports:
+      - "8000:8000"
+    depends_on:
+      - bdb
+
+volumes:
+  postgres_data:
