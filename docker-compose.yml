@@ -9,14 +9,27 @@ services:
     environment:
       POSTGRES_PASSWORD: BUYB2QAZ
       POSTGRES_USER: postgres
-<<<<<<< HEAD
-      POSTGRES_DB: Leather_product
-=======
-      POSTGRES_DB: dbname;
->>>>>>> message
+      POSTGRES_DB: dbname
     restart: always
     ports:
-    - "5432:5432"
+      - "5432:5432"
+
+  my-app:
+    container_name: my-app
+    build:
+      context: my-app
+      dockerfile: Dockerfile
+    volumes:
+      - ./my-app:/usr/src/my-app
+      # One-way volume to use node_modules from inside image
+      - /usr/src/my-app/node_modules
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - bweb
+    command: npm start
 
   bweb:
     container_name: bweb
