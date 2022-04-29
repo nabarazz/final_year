@@ -9,7 +9,6 @@ It counts with the following stack:
 **Backend Site**
 
 **Document Site**
-
 https://1drv.ms/w/s!AvcbFx3ccdplhGWLThxPyY9XLXyn?e=cOWN1Z
 
 
